@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'drf_yasg',
 
     'account',
+    'feedback',
+    'movies',
 ]
 
 MIDDLEWARE = [
