@@ -6,7 +6,7 @@ from decouple import config
 def send_activation_code(email, code):
     send_mail(
         'Ticket',
-        f'http://localhost:8000/api/v1/account/activate/{code}',
+        f'http://localhost:8000/account/activate/{code}',
         config('EMAIL_HOST_USER'),
         [email]
     )
