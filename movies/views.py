@@ -8,11 +8,6 @@ from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnl
 from movies.models import Actor, Video
 from movies.serializers import *
 
-from django.views.decorators.cache import cache_page
-from django.utils.decorators import method_decorator
-
-# from applications.post.serializers import CommentSerializer
-
 
 class CustomPagination(PageNumberPagination):
     page_size = 5
@@ -30,7 +25,7 @@ class VideoViewSet(viewsets.ModelViewSet):
     serializer_class = VideoSerializer
     permission_classes = [IsAuthenticated] 
 
-@method_decorator(cache_page(60 * 15), name='dispatch')
+
 class MovieViewSet(viewsets.ModelViewSet):
     queryset = Movie.objects.all()
     pagination_class = CustomPagination
@@ -49,10 +44,3 @@ class CommentModelViewSet(ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
     
-
-
-# from django.http import HttpResponse
-# logger = logging.getLogger(__name__)
-# def index(request):
-#     logger.error("Test!!")
-#     return HttpResponse("Hello logging world.")

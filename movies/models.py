@@ -126,7 +126,6 @@ class Rating(models.Model):
         verbose_name_plural = "Рейтинги"
 
 class Reviews(models.Model):
-    # email = models.EmailField()
     # name = models.CharField("Имя", max_length=100)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
     text = models.TextField("Отзыв", max_length=5000)
