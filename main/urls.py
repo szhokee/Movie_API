@@ -20,5 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('swagger/', schema_view.with_ui('swagger')),
     path('account/', include('account.urls')),
+    path('feedback/', include('feedback.urls')),
+    path('movies/', include('movies.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

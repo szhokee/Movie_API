@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
-from account.serializers import RegisterSerializer, LoginSerializer
+from account.serializers import RegisterSerializer, LoginSerializer, ForgotPasswordSerializer,ForgotPasswordCompleteSerializer
 from rest_framework.response import Response
 from django.contrib.auth import get_user_model
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -46,3 +46,18 @@ class LogoutAPIView(APIView):
             return Response('Вы успешно разлогинились!', status=200)
         except:
             return Response(status=403)
+
+
+class ForgotPasswordAPIView(APIView):
+    def post(self, request):
+        serializer = ForgotPasswordSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.send_reset_password_code()
+        return Response('вам отправлено письмо для восстановления пароля')
+
+class ForgotPasswordCompleteAPIView(APIView):
+    def post(self, request):
+        serializer = ForgotPasswordCompleteSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.set_new_password()
+        return Response('Пароль успешно изменен')

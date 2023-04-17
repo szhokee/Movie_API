@@ -5,7 +5,7 @@ from decouple import config
 @shared_task
 def send_activation_code(email, code):
     send_mail(
-        'Ticket',
+        'MovAPI',
         f'http://localhost:8000/account/activate/{code}',
         config('EMAIL_HOST_USER'),
         [email]
@@ -14,7 +14,7 @@ def send_activation_code(email, code):
 @shared_task
 def send_reset_password_code(email, code):
     send_mail(
-        'Ticket',
+        'MovAPI',
         f'To reset your password use this code {code}',
         config('EMAIL_HOST_USER'),
         [email]
